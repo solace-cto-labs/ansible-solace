@@ -32,10 +32,10 @@ jobs:
         id: auth
       - name: Cancel Workflow
         if: ${{ always() && steps.auth.outputs.IS_AUTHORIZED == 'false' }}
-        uses: andymckay/cancel-action@0.2
+        uses: andymckay/cancel-action@8f8510d9dea52fcc8eb6ca10d6ce47fd5fc43cd8 # 0.2
 
       - name: Checkout Current Branch
-        uses: actions/checkout@master
+        uses: actions/checkout@61b9e3751b92087fd0b06925ba6dd6314e06f089 # master
         with:
           ref: ${{ github.ref }}
 
@@ -44,7 +44,7 @@ jobs:
           sudo apt-get install -y python-dev libldap2-dev libsasl2-dev libssl-dev
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@e9aba2c848f5ebd159c070c61ea2c4e2b122355e # v2
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -71,7 +71,7 @@ jobs:
 
       - name: Archive logs
         if: ${{ (failure() && !cancelled()) || (always() && github.event_name == 'workflow_dispatch') }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         with:
           name: ${{ env.TEST_TEST_RUNNER_LOGS_NAME }}
           path: ${{ github.workspace }}/${{ env.TEST_RUNNER_LOGS_DIR }}
